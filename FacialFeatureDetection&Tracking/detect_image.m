@@ -53,6 +53,10 @@ function detect_image(input, mode)
     % more details
     faces = Models.DM{1}.fd_h.detect(im,'MinNeighbors',option.min_neighbors,...
       'ScaleFactor',1.2,'MinSize',[50 50]);
+%     profilefaces = Models.DM{1}.fd_p.detect(im,'MinNeighbors',option.min_neighbors,...
+%       'ScaleFactor',1.2,'MinSize',[50 50]);
+%     glassesfaces = Models.DM{1}.fd_g.detect(im,'MinNeighbors',option.min_neighbors,...
+%       'ScaleFactor',1.2,'MinSize',[50 50]);
     imshow(im); hold on;
     for i = 1:length(faces)
       output = xx_track_detect(Models,im,faces{i},option);
@@ -60,6 +64,19 @@ function detect_image(input, mode)
         plot(output.pred(:,1),output.pred(:,2),'g*','markersize',2); 
       end
     end
+%     for i = 1:length(profilefaces)
+%       output = xx_track_detect(Models,im,profilefaces{i},option);
+%       if ~isempty(output.pred)
+%         plot(output.pred(:,1),output.pred(:,2),'g*','markersize',2); 
+%       end
+%     end
+%     for i = 1:length(glassesfaces)
+%       output = xx_track_detect(Models,im,glassesfaces{i},option);
+%       if ~isempty(output.pred)
+%         plot(output.pred(:,1),output.pred(:,2),'g*','markersize',2); 
+%       end
+%     end
+%     
     hold off
     
   elseif strcmpi(mode,'interactive') == 1

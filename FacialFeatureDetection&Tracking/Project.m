@@ -7,7 +7,7 @@ cd D:/School/Computer_Vision/PhotoVision/FacialFeatureDetection&Tracking/
 %[Models, option] = xx_initialize;
 %im = imread('./data/subtiel.jpg');
 
-im = imread('./data/subtiel2.jpg');
+im = imread('./data/context.jpg');
 %im = imrotate(im, 45);
 
   % check whether the image is too big

@@ -55,7 +55,7 @@ function [Models, option] = xx_initialize
   %xml_file = './models/haarcascade_eye_tree_eyeglasses.xml';
   %xml_file = './models/haarcascade_frontalface_alt.xml';
   %xml_file = './models/haarcascade_frontalface_alt_tree.xml';
-  xml_file = './models/haarcascade_frontalface_default.xml';
+  %xml_file = './models/haarcascade_frontalface_default.xml';
   %xml_file = './models/lbpcascade_frontalface.xml';
   %xml_file = './models/facefinder.ea';
   

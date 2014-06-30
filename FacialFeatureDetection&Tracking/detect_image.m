@@ -46,21 +46,18 @@ function detect_image(input, mode)
       im = cv.resize(im, (600 / size(im, 1)));
   end
   
-  
-  %im=imrotate(im, 45);
-  
   % load model and parameters, type 'help xx_initialize' for more details
   [Models,option] = xx_initialize;
   
   if strcmpi(mode,'auto') == 1
     % perform face alignment in one image, type 'help xx_track_detect' for
     % more details
-    faces = Models.DM{1}.fd_h.detect(im,'MinNeighbors',option.min_neighbors,...
-      'ScaleFactor',1.2,'MinSize',[50 50]);
-%     profilefaces = Models.DM{1}.fd_p.detect(im,'MinNeighbors',option.min_neighbors,...
-%       'ScaleFactor',1.2,'MinSize',[50 50]);
-%     glassesfaces = Models.DM{1}.fd_g.detect(im,'MinNeighbors',option.min_neighbors,...
-%       'ScaleFactor',1.2,'MinSize',[50 50]);
+    %faces = Models.DM{1}.fd_h.detect(im,'MinNeighbors',option.min_neighbors,...
+    %  'ScaleFactor',1.2,'MinSize',[50 50]);
+
+    % own implemented face detect function, detects 2 more faces
+    faces = detect_matfaces( im );
+  
     imshow(im); hold on;
     for i = 1:length(faces)
       output = xx_track_detect(Models,im,faces{i},option);
@@ -68,19 +65,6 @@ function detect_image(input, mode)
         plot(output.pred(:,1),output.pred(:,2),'g*','markersize',2); 
       end
     end
-%     for i = 1:length(profilefaces)
-%       output = xx_track_detect(Models,im,profilefaces{i},option);
-%       if ~isempty(output.pred)
-%         plot(output.pred(:,1),output.pred(:,2),'g*','markersize',2); 
-%       end
-%     end
-%     for i = 1:length(glassesfaces)
-%       output = xx_track_detect(Models,im,glassesfaces{i},option);
-%       if ~isempty(output.pred)
-%         plot(output.pred(:,1),output.pred(:,2),'g*','markersize',2); 
-%       end
-%     end
-%     
     hold off
     
   elseif strcmpi(mode,'interactive') == 1

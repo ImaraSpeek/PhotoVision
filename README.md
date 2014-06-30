@@ -75,7 +75,7 @@ Source of variation:
 ##Implementation
 
 ###Used libraries and data
-Intraface provides the matlab code for face recognition using OpenCV. However it only recognizes the frontalfaces and does not recognize any profile faces. Intraface initialized the models using certain set parameters: the minimum face score for recognized faces, its minimum neighbors, the minimum face-image ratio an a flag whether or not to compute the pose
+Intraface provides the matlab code for face recognition using OpenCV. However it only recognizes the frontalfaces and does not recognize any profile faces. Intraface initialized the models using certain set parameters: the minimum face score for recognized faces, its minimum neighbors, the minimum face-image ratio an a flag whether or not to compute the pose.
 
 ###Own implementations
 
@@ -86,7 +86,7 @@ When looking for solutions, I discovered that the matlab and the opencv implemen
 ![Default openCV face detection](FacialFeatureDetection&Tracking/results/alt2.jpg)
 ![Model fit interactive](FacialFeatureDetection&Tracking/results/interactive.jpg)
 
-When fitting the model using the interactive mode, the faces were indeed recognized. When rotating the image, some faces were also found. For this reason I played around with the matlab face vision cascade object detectors. Using a combination of the default frontalface variant, the profileface and the lbp variant, we can detect (not fit) all but 1 face. As this face is particularly small and occluded and does not necessarily meet the needs for the final application, i did not put any more effort into detecting this face.  
+When fitting the model using the interactive mode, the faces were indeed recognized. When rotating the image, some faces were also found. For this reason I played around with the matlab face vision cascade object detectors. Using a combination of the default frontalface variant, the profileface and the lbp variant, we can detect (not fit) all but 1 face. As this face is particularly small and occluded and does not necessarily meet the needs for the final application, i did not put any more effort into detecting this face.  Also, the face detecting algorithm was able to detect the profile face with glasses, but the model fitter was unable to fit to the face. 
 
 
 ##Experiments

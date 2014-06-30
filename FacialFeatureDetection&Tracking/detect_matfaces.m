@@ -1,14 +1,9 @@
-%clear all, clc;
-
-% Set the correct folder
-cd D:/School/Computer_Vision/PhotoVision/FacialFeatureDetection&Tracking/
-
-% Initialize the model and read in the images
-%[Models, option] = xx_initialize;
-%im = imread('./data/subtiel.jpg');
-
-im = imread('./data/subtiel2.jpg');
-%im = imrotate(im, 45);
+function bboxfaces = detect_matfaces( im )
+%detect_matfaces detects all faces in the image using the profile, lbp 
+%and frontal haarcascade. It removes any double recognized faces and 
+%translates the returned matrix into cells as is necessary for the
+%model fitting.
+%   Detailed explanation goes here
 
   % check whether the image is too big
   if size(im, 1) > 600
@@ -58,16 +53,6 @@ bbox( all(~bbox,2), : ) = [];
 
 % put all the faces into different cells so it can be handled in the rest
 A = mat2cell(bbox, ones(size(bbox, 1), 1), [4]);
-faces = A';
-
-%bbox(bbox == 0) = [];
-%bbox = sparse(bbox);
-
-
-% display all the found images
-% imdetect = insertObjectAnnotation(im, 'rectangle', bboxlbp(5,:), 'Face');
-% figure, imshow(imdetect);
-
-imdetect = insertObjectAnnotation(im, 'rectangle', bbox, 'Face');
-figure, imshow(imdetect), title('Detected Face');
+bboxfaces = A';
+end
 

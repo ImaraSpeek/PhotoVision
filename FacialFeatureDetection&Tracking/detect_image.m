@@ -1,5 +1,5 @@
 % Signature: 
-%   detect_image(mode)
+%   detect_image(input, mode)
 %
 % Usage:
 %     This function demonstrates how to use xx_track_detect in detecting
@@ -22,6 +22,7 @@
 %   parameter. See more details in "xx_track_detect.m".
 %
 % Params:
+%   input - string to the input image
 %   mode - 'iteractive' or 'auto'
 %
 % Return: None
@@ -42,7 +43,7 @@ function detect_image(input, mode)
   
   % check whether the image is too big
   if size(im, 1) > 600
-      im = imresize(im, (600 / size(im, 1)));
+      im = cv.resize(im, (600 / size(im, 1)));
   end
   
   % load model and parameters, type 'help xx_initialize' for more details

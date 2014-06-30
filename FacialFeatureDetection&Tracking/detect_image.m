@@ -46,6 +46,9 @@ function detect_image(input, mode)
       im = cv.resize(im, (600 / size(im, 1)));
   end
   
+  
+  %im=imrotate(im, 45);
+  
   % load model and parameters, type 'help xx_initialize' for more details
   [Models,option] = xx_initialize;
   

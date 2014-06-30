@@ -81,6 +81,12 @@ Intraface provides the matlab code for face recognition using OpenCV. However it
 
 When running the intraface detect_image functionality, not all faces are actually recognized (10/14) using the 'auto' opencv functionality. However when using the 'interactive' mode that allows for manually annotating all images, it will recognize all but 1 face (13/14). This indicates that the face detection isn't working properly and needs adjusting.
 
+When looking for solutions, I discovered that the matlab and the opencv implementation for finding faces isn't rotation invariant which was the reason no faces were discovered. 
+
+![Default openCV face detection](FacialFeatureDetection&Tracking/results/alt2.jpg)
+![Model fit interactive](FacialFeatureDetection&Tracking/results/interactive.jpg)
+
+When fitting the model using the interactive mode, the faces were indeed recognized. When rotating the image, some faces were also found. For this reason I played around with the matlab face vision cascade object detectors. Using a combination of the default frontalface variant, the profileface and the lbp variant, we can detect (not fit) all but 1 face. As this face is particularly small and occluded and does not necessarily meet the needs for the final application, i did not put any more effort into detecting this face.  
 
 
 ##Experiments

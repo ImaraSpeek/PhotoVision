@@ -101,8 +101,15 @@ When warping the images, control points must be selected that will control the w
 
 When using these images, the frontal mean shape ratio can be determined of the faces that is searched which is 1.0730 and the ratio of the query face is 1.1034. 
 
-imara: 1.0730 - 1.1034
+imara: 1.0730 - 1.1034 - 1.0371
 laurens: 1.0695
+
+### Discriminative features
+There are 3 levels of features by which we can discriminate certain persons. Level 1 display the global appearance of the person and can distinguish between sizes of face, een some gender and racial based features and is mostly used to speed up the process of recognition to easily elimate candidates the same manner as a cascaded classifier behaves. 
+
+Level 2 contains the most discriminative features, a shape and appearance model and local binary patterns within the face. And finally level 3 contains even more details and is more specific and can distinguish moles, wrinkles by extra examining local parts of the face, as would be necessary when one is looking for twins or very similar persons. This level will be left out for now.
+
+
 
  **todo: argument why using these discriminant features**
 

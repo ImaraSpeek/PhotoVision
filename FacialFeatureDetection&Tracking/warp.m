@@ -1,7 +1,7 @@
   clear all
 
   input = './data/front.jpg';
-  input2 = './data/imara4.jpg';
+  input2 = './data/imara.jpg';
   mode = 'auto';
   
   % read image from input file
@@ -19,6 +19,10 @@
   
   % load model and parameters, type 'help xx_initialize' for more details
   [Models,option] = xx_initialize;
+
+  
+%------------------------------------------------------------------------------------------------------------------------------  
+  
 
     % own implemented face detect function, detects 2 more faces
     faces = detect_matfaces( im );
@@ -45,9 +49,13 @@ line([output.pred(23,1) output.pred(26,1)],[output.pred(23,2) output.pred(26,2)]
 
 baseEyes = sqrt(abs(output.pred(11,1) - output.pred(14,1)).^2 + abs((output.pred(11,2) - output.pred(14,2)).^2));
 baseNose = sqrt(abs(output.pred(23,1) - output.pred(26,1)).^2 + abs((output.pred(23,2) - output.pred(26,2)).^2));
-
 baseRatio = baseNose / baseEyes;
 
+
+%------------------------------------------------------------------------------------------------------------------------------
+
+
+% check if a face is detected to perform a warp later on
 facedetected = false;
 facesside = detect_matfaces( imside );
 if (~cellfun('isempty', facesside))
@@ -67,11 +75,11 @@ if (~cellfun('isempty', facesside))
 else
         error('no face detected in queried image');
 end
+hold off;
 
- hold off;
+%------------------------------------------------------------------------------------------------------------------------------
 
 % STARTING THE WARP 
-
 if facedetected == true;
     % generate the piecewise affine transformation
     tform = fitgeotrans(movingfixedPoints,fixedPoints,'Affine');
@@ -79,43 +87,47 @@ if facedetected == true;
     imsidewarp = imwarp(imside,tform,'OutputView',imref2d(size(im)));
 
     faceswarp = detect_matfaces( imsidewarp );
+        if (~cellfun('isempty', faceswarp))
+        % TODO generalize this
+        faceswarp{1} = [(faceswarp{1}(1) - faceswarp{1}(3) / 4) (faceswarp{1}(2) - faceswarp{1}(2) / 4) ...
+                        (faceswarp{1}(3) * 1.25) (faceswarp{1}(4) * 1.25)];
+        imsidebound = insertObjectAnnotation(imsidewarp,'rectangle',faceswarp{1},'Face');
+        for i = 1:length(facesside)
+                    output3 = xx_track_detect(Models,imsidewarp,faceswarp{i},option);
+           if ~isempty(output3.pred)
+                    % first select the mean control points and the examples control points
+                    movingPoints  = [output3.pred(20,1) output3.pred(20,2); output3.pred(29,1) output3.pred(29,2); ...
+                                     output3.pred(14,1) output3.pred(14,2); output3.pred(15,1) output3.pred(15,2); ...
+                                     output3.pred(19,1) output3.pred(19,2); ];
+           end
+        end 
 
-    % TODO generalize this
-    faceswarp{1} = [(faceswarp{1}(1) - faceswarp{1}(3) / 4) (faceswarp{1}(2) - faceswarp{1}(2) / 4) ...
-                    (faceswarp{1}(3) * 1.25) (faceswarp{1}(4) * 1.25)];
-    imsidebound = insertObjectAnnotation(imsidewarp,'rectangle',faceswarp{1},'Face');
-    for i = 1:length(facesside)
-                output3 = xx_track_detect(Models,imsidewarp,faceswarp{i},option);
-       if ~isempty(output3.pred)
-                % first select the mean control points and the examples control points
-                movingPoints  = [output3.pred(20,1) output3.pred(20,2); output3.pred(29,1) output3.pred(29,2); ...
-                                 output3.pred(14,1) output3.pred(14,2); output3.pred(15,1) output3.pred(15,2); ...
-                                 output3.pred(19,1) output3.pred(19,2); ];
-       end
-    end 
+        % approximate the normalized face
 
-    % approximate the normalized face
+            subplot(2,2,3), imshow(imsidebound); hold on;
+                insertObjectAnnotation(imsidewarp,'rectangle',faceswarp{1},'Face');
+                plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2);       
+                plot(output3.pred(:,1),output3.pred(:,2),'g*','markersize',2);
+                plot(movingPoints(:,1),movingPoints(:,2),'c*','markersize',2);
+                %draw line for features
+                % the nose
+                line([output3.pred(11,1) output3.pred(14,1)],[output3.pred(11,2) output3.pred(14,2)]);
+                % between the eyes
+                line([output3.pred(23,1) output3.pred(26,1)],[output3.pred(23,2) output3.pred(26,2)]);
+            hold off;
 
-        subplot(2,2,3), imshow(imsidebound); hold on;
-            insertObjectAnnotation(imsidewarp,'rectangle',faceswarp{1},'Face');
-            plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2);       
-            plot(output3.pred(:,1),output3.pred(:,2),'g*','markersize',2);
-            plot(movingPoints(:,1),movingPoints(:,2),'c*','markersize',2);
-            %draw line for features
-            % the nose
-            line([output3.pred(11,1) output3.pred(14,1)],[output3.pred(11,2) output3.pred(14,2)]);
-            % between the eyes
-            line([output3.pred(23,1) output3.pred(26,1)],[output3.pred(23,2) output3.pred(26,2)]);
-        hold off;
+        queryEyes = sqrt(abs(output3.pred(11,1) - output3.pred(14,1)).^2 + abs((output3.pred(11,2) - output3.pred(14,2)).^2));
+        queryNose = sqrt(abs(output3.pred(23,1) - output3.pred(26,1)).^2 + abs((output3.pred(23,2) - output3.pred(26,2)).^2));
 
-    queryEyes = sqrt(abs(output3.pred(11,1) - output3.pred(14,1)).^2 + abs((output3.pred(11,2) - output3.pred(14,2)).^2));
-    queryNose = sqrt(abs(output3.pred(23,1) - output3.pred(26,1)).^2 + abs((output3.pred(23,2) - output3.pred(26,2)).^2));
+        queryRatio = queryNose / queryEyes;
 
-    queryRatio = queryNose / queryEyes;
-
-        falsecolorOverlay = imfuse(im,imsidewarp);
-        subplot(2,2,4), imshow(falsecolorOverlay,'InitialMagnification','fit'); hold on;
-            plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2); 
-            plot(movingPoints(:,1),movingPoints(:,2),'c*','markersize',2);
-        hold off
+            falsecolorOverlay = imfuse(im,imsidewarp);
+            subplot(2,2,4), imshow(falsecolorOverlay,'InitialMagnification','fit'); hold on;
+                plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2); 
+                plot(movingPoints(:,1),movingPoints(:,2),'c*','markersize',2);
+            hold off
+        else
+            error('no face is detected in the warp');
+        end
+           
 end

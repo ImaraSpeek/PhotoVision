@@ -35,12 +35,12 @@
 %   Application to Face Alignment. CVPR, 2013
 %
 
-function detect_image(im, mode)
+function detect_image(input, mode)
   %input = './data/front.jpg';
   %mode = 'auto';
   
   % read image from input file
-  %im=imread(input);
+  im=imread(input);
   
   % check whether the image is too big
   if size(im, 1) > 600

@@ -99,6 +99,10 @@ When warping the images, control points must be selected that will control the w
 ![bounding box detected face](FacialFeatureDetection&Tracking/results/Warping/bbox_detected_warp.jpg)
 ![bounding box correct warp](FacialFeatureDetection&Tracking/results/Warping/bbox_correct_warp.jpg)
 
+When using these images, the frontal mean shape ratio can be determined of the faces that is searched which is 1.0730 and the ratio of the query face is 1.1034. 
+
+imara: 1.0730 - 1.1034
+laurens: 1.0695
 
  **todo: argument why using these discriminant features**
 

@@ -74,6 +74,8 @@ Source of variation:
 
 ##Implementation
 
+Using the IntraFace library, a model can be fitted to any detected faces containing 43 feature points . From these features points the discriminant features can be extracted. However to compare them amongst one another for verification, they have to be warped to a general perpective. To do this, a mean face of preferred face has to be choosen. As warping all points would distort the identification of the persons, certain control points have to be chosen that are independent from the identification features and thus can be used to warp onto the choosen mean face. 
+
 ###Used libraries and data
 Intraface provides the matlab code for face recognition using OpenCV. However it only recognizes the frontalfaces and does not recognize any profile faces. Intraface initialized the models using certain set parameters: the minimum face score for recognized faces, its minimum neighbors, the minimum face-image ratio an a flag whether or not to compute the pose.
 

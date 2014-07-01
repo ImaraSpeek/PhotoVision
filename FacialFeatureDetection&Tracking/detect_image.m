@@ -36,7 +36,8 @@
 %
 
 function detect_image(input, mode)
-  %input = './data/pic.jpg';
+  %input = './data/front.jpg';
+  %mode = 'auto';
   
   % read image from input file
   im=imread(input);

@@ -7,8 +7,8 @@ globals;
 name = 'multipie';
 
 % record a log 
-file = [cachedir name, '.log'];
-diary(file);
+% file = [cachedir name, '.log'];
+% diary(file);
 
 try
     load([cachedir name '_data.mat']);

@@ -51,6 +51,8 @@ bbox = [bbox; bboxface];
 % remove the zero rows
 bbox( all(~bbox,2), : ) = [];
 
+%insertObjectAnnotation(im,'rectangle',bbox,'Face');
+
 % put all the faces into different cells so it can be handled in the rest
 A = mat2cell(bbox, ones(size(bbox, 1), 1), [4]);
 bboxfaces = A';

@@ -33,8 +33,18 @@
 fixedPoints  = [double(output.pred(20,1)) double(output.pred(20,2)); double(output.pred(29,1)) double(output.pred(29,2)); ...
                 double(output.pred(14,1)) double(output.pred(14,2)); double(output.pred(15,1)) double(output.pred(15,2)); ...
                 double(output.pred(19,1)) double(output.pred(19,2)); ];
-    plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2); hold off;
+plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2); hold off;
 
+%draw line for features
+% the nose
+line([output.pred(11,1) output.pred(14,1)],[output.pred(11,2) output.pred(14,2)]);
+% between the eyes
+line([output.pred(23,1) output.pred(26,1)],[output.pred(23,2) output.pred(26,2)]);
+
+baseEyes = sqrt(abs(output.pred(11,1) - output.pred(14,1)).^2 + abs((output.pred(11,2) - output.pred(14,2)).^2));
+baseNose = sqrt(abs(output.pred(23,1) - output.pred(26,1)).^2 + abs((output.pred(23,2) - output.pred(26,2)).^2));
+
+baseRatio = baseNose / baseEyes;
 
 facesside = detect_matfaces( imside );
 %insertObjectAnnotation(imside,'rectangle',facesside{1},'Face');
@@ -48,7 +58,7 @@ subplot(2, 2, 2), imshow(imside); hold on;
  movingfixedPoints  = [output2.pred(20,1) output2.pred(20,2); output2.pred(29,1) output2.pred(29,2); ...
                        output2.pred(14,1) output2.pred(14,2); output2.pred(15,1) output2.pred(15,2); ...
                        output2.pred(19,1) output2.pred(19,2); ];    
- plot(movingfixedPoints(:,1), movingfixedPoints(:,2), 'b*', 'markersize',2);
+ plot(movingfixedPoints(:,1), movingfixedPoints(:,2), 'c*', 'markersize',2);
 
  hold off;
 
@@ -81,10 +91,21 @@ end
         insertObjectAnnotation(imsidewarp,'rectangle',faceswarp{1},'Face');
         plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2);       
         plot(output3.pred(:,1),output3.pred(:,2),'g*','markersize',2);
-        plot(movingPoints(:,1),movingPoints(:,2),'b*','markersize',2);
+        plot(movingPoints(:,1),movingPoints(:,2),'c*','markersize',2);
+        %draw line for features
+        % the nose
+        line([output3.pred(11,1) output3.pred(14,1)],[output3.pred(11,2) output3.pred(14,2)]);
+        % between the eyes
+        line([output3.pred(23,1) output3.pred(26,1)],[output3.pred(23,2) output3.pred(26,2)]);
     hold off;
+    
+queryEyes = sqrt(abs(output3.pred(11,1) - output3.pred(14,1)).^2 + abs((output3.pred(11,2) - output3.pred(14,2)).^2));
+queryNose = sqrt(abs(output3.pred(23,1) - output3.pred(26,1)).^2 + abs((output3.pred(23,2) - output3.pred(26,2)).^2));
+
+queryRatio = queryNose / queryEyes;
     
     falsecolorOverlay = imfuse(im,imsidewarp);
     subplot(2,2,4), imshow(falsecolorOverlay,'InitialMagnification','fit'); hold on;
         plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2); 
+        plot(movingPoints(:,1),movingPoints(:,2),'c*','markersize',2);
     hold off

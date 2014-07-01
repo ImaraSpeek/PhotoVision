@@ -85,11 +85,27 @@ When running the intraface detect_image functionality, not all faces are actuall
 
 When looking for solutions, I discovered that the matlab and the opencv implementation for finding faces isn't rotation invariant which was the reason no faces were discovered. 
 
-![Default openCV face detection](FacialFeatureDetection&Tracking/results/alt2.jpg)
-![Model fit interactive](FacialFeatureDetection&Tracking/results/interactive.jpg)
+![Default openCV face detection](FacialFeatureDetection&Tracking/results/Detection/alt2.jpg)
+![Model fit interactive](FacialFeatureDetection&Tracking/results/Detection/interactive.jpg)
 
 When fitting the model using the interactive mode, the faces were indeed recognized. When rotating the image, some faces were also found. For this reason I played around with the matlab face vision cascade object detectors. Using a combination of the default frontalface variant, the profileface and the lbp variant, we can detect (not fit) all but 1 face. As this face is particularly small and occluded and does not necessarily meet the needs for the final application, i did not put any more effort into detecting this face.  Also, the face detecting algorithm was able to detect the profile face with glasses, but the model fitter was unable to fit to the face. 
 
+### Normalizing the faces
+When the feature model is fit onto the face, its features need to be normalized in order to compare them amongst one another. This can be done using a mean shape, or using a image that displays the preferred shape model. Because there is no databade available for the model used by Intraface, made an image that looks straight ahead and thus will function as a base line shape upon which  the test image will be warped. 
+
+When warping the images, control points must be selected that will control the warp. These points should be identification invariable as the warp should not influence the identification features. The identification features that is used is the ratio of the length of the nose with the distance in between the eyes. To accomodate a correct warp it would have been preferable to have features surrounding the contour of the face as they hardly influence any identification features. However, as I didn't have this luxury and thus also couldn't perform a triangle based interpolation or piecewise affine warp, I decided to use the outside points of the nose, the outside points of the eye and the tip of the nose. Using the fitgeotrans function of Matlab I warped the control points using affine interpolation. The next problem occured, the detcted faces did not include the entire face as the face was now rotated. For this reason I had to combine the original detected face with the newly detected face so the model could fit the feature points properly. This provided the following results:
+
+![bounding box original face](FacialFeatureDetection&Tracking/results/Warping/bbox_orig.jpg)
+![bounding box detected face](FacialFeatureDetection&Tracking/results/Warping/bbox_detected_warp.jpg)
+![bounding box correct warp](FacialFeatureDetection&Tracking/results/Warping/bbox_correct_warp.jpg)
+
+
+ **todo: argument why using these discriminant features**
+
+##Shortcomings
+
+- no feature points around jaw line
+- no available appearance model
 
 ##Experiments
 

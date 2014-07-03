@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{edwards1998aam}
+T.F.~Cootes G.J.~Edwards and C.J. Taylor.
+\newblock Face recognition using active appearance models.
+\newblock 1998.
+
 \bibitem{gao2009normalization}
 H.K.~Ekenel H.~Gao and R.~Stiefelhagen.
 \newblock Pose normalization for local appearance-based face recognition.

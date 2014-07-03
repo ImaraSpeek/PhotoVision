@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.2.19)  3 JUL 2014 14:18
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.2.19)  3 JUL 2014 16:23
 entering extended mode
 **D:/School/Computer_Vision/PhotoVision/report/FaceVerification_Imara.tex
 (D:/School/Computer_Vision/PhotoVision/report/FaceVerification_Imara.tex
@@ -481,44 +481,91 @@ Underfull \hbox (badness 1043) in paragraph at lines 76--76
  |[]\OT1/cmr/bx/n/12 Active ap-pear-ance mod-els for
  []
 
-<./ratio.png, id=18, 731.73375pt x 419.31656pt>
-File: ./ratio.png Graphic file (type png)
- <use ./ratio.png>
-Package pdftex.def Info: ./ratio.png used on input line 94.
-(pdftex.def)             Requested size: 226.0pt x 129.50691pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 85.
 
-Overfull \hbox (5.0pt too wide) in paragraph at lines 94--95
+LaTeX Warning: Reference `fig:alt2' on page 2 undefined on input line 101.
+
+<alt2.jpg, id=18, 805.0075pt x 602.25pt>
+File: alt2.jpg Graphic file (type jpg)
+ <use alt2.jpg>
+Package pdftex.def Info: alt2.jpg used on input line 105.
+(pdftex.def)             Requested size: 226.0pt x 169.06995pt.
+
+Overfull \hbox (5.0pt too wide) in paragraph at lines 105--106
  [] 
  []
 
-(D:\School\Computer_Vision\PhotoVision\report\FaceVerification_Imara.bbl
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<interactive.jpg, id=19, 800.9925pt x 602.25pt>
+File: interactive.jpg Graphic file (type jpg)
+ <use interactive.jpg>
+Package pdftex.def Info: interactive.jpg used on input line 113.
+(pdftex.def)             Requested size: 226.0pt x 169.92458pt.
+
+Overfull \hbox (5.0pt too wide) in paragraph at lines 113--114
+ [] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<ratio.png, id=20, 731.73375pt x 419.31656pt>
+File: ratio.png Graphic file (type png)
+ <use ratio.png>
+Package pdftex.def Info: ratio.png used on input line 125.
+(pdftex.def)             Requested size: 226.0pt x 129.50691pt.
+
+Overfull \hbox (5.0pt too wide) in paragraph at lines 125--126
+ [] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-) [2 <D:/School/Computer_Vision/PhotoVision/report/ratio.png>]
-(D:\School\Computer_Vision\PhotoVision\report\FaceVerification_Imara.aux) ) 
+ [2]
+Overfull \vbox (43.93903pt too high) has occurred while \output is active []
+
+
+(D:\School\Computer_Vision\PhotoVision\report\FaceVerification_Imara.bbl)
+[3 <D:/School/Computer_Vision/PhotoVision/report/alt2.jpg> <D:/School/Computer_
+Vision/PhotoVision/report/interactive.jpg> <D:/School/Computer_Vision/PhotoVisi
+on/report/ratio.png>]
+(D:\School\Computer_Vision\PhotoVision\report\FaceVerification_Imara.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 12210 strings out of 493921
- 245969 string characters out of 3144876
- 279561 words of memory out of 3000000
- 15291 multiletter control sequences out of 15000+200000
- 8410 words of font info for 30 fonts, out of 3000000 for 9000
+ 12230 strings out of 493921
+ 246234 string characters out of 3144876
+ 281623 words of memory out of 3000000
+ 15307 multiletter control sequences out of 15000+200000
+ 8756 words of font info for 31 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 62i,7n,80p,1002b,600s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
-ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Prog
-ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program
- Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Fi
-les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files
- (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x8
-6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files (x86)/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on FaceVerification_Imara.pdf (2 pages, 1114025 bytes).
+ 62i,7n,80p,1118b,602s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Pro
+gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program File
+s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x
+86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86
+)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files (x86)/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on FaceVerification_Imara.pdf (3 pages, 2017760 bytes).
 PDF statistics:
- 59 PDF objects out of 1000 (max. 8388607)
+ 76 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 28 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,5 +1,5 @@
 % Signature: 
-%   detect_image(mode)
+%   detect_image(input, mode)
 %
 % Usage:
 %     This function demonstrates how to use xx_track_detect in detecting
@@ -22,6 +22,7 @@
 %   parameter. See more details in "xx_track_detect.m".
 %
 % Params:
+%   input - string to the input image
 %   mode - 'iteractive' or 'auto'
 %
 % Return: None
@@ -35,14 +36,15 @@
 %
 
 function detect_image(input, mode)
-  %input = './data/pic.jpg';
+  %input = './data/front.jpg';
+  %mode = 'auto';
   
   % read image from input file
   im=imread(input);
   
   % check whether the image is too big
   if size(im, 1) > 600
-      im = imresize(im, (600 / size(im, 1)));
+      im = cv.resize(im, (600 / size(im, 1)));
   end
   
   % load model and parameters, type 'help xx_initialize' for more details
@@ -51,8 +53,12 @@ function detect_image(input, mode)
   if strcmpi(mode,'auto') == 1
     % perform face alignment in one image, type 'help xx_track_detect' for
     % more details
-    faces = Models.DM{1}.fd_h.detect(im,'MinNeighbors',option.min_neighbors,...
-      'ScaleFactor',1.2,'MinSize',[50 50]);
+    %faces = Models.DM{1}.fd_h.detect(im,'MinNeighbors',option.min_neighbors,...
+    %  'ScaleFactor',1.2,'MinSize',[50 50]);
+
+    % own implemented face detect function, detects 2 more faces
+    faces = detect_matfaces( im );
+  
     imshow(im); hold on;
     for i = 1:length(faces)
       output = xx_track_detect(Models,im,faces{i},option);

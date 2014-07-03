@@ -40,17 +40,25 @@
 %
 
 function [Models, option] = xx_initialize
+
+% initialize all the options for the model classifier
   option.face_score = 0.3;
-  
   option.min_neighbors = 2;
-  
   option.min_face_image_ratio = 0.15;
-  
   option.compute_pose = true;
   
   % OpenCV face detector model file
   xml_file = './models/haarcascade_frontalface_alt2.xml';
-  %xml_profile = './models/haarcascade_profileface.xml';
+  
+  % addd the xml file for profile faces and eyeglasses
+  %xml_file = './models/haarcascade_profileface.xml';
+  %xml_file = './models/haarcascade_eye_tree_eyeglasses.xml';
+  %xml_file = './models/haarcascade_frontalface_alt.xml';
+  %xml_file = './models/haarcascade_frontalface_alt_tree.xml';
+  %xml_file = './models/haarcascade_frontalface_default.xml';
+  %xml_file = './models/lbpcascade_frontalface.xml';
+  %xml_file = './models/facefinder.ea';
+  
   
   % load tracking model
   load('./models/TrackingModel-xxsift-v1.10.mat');
@@ -58,18 +66,18 @@ function [Models, option] = xx_initialize
   % load detection model
   load('./models/DetectionModel-xxsift-v1.5.mat');
   
-  % create face detector handle
+  % create face detector handlers
   fd_h = cv.CascadeClassifier(xml_file);
-  %fd_h2 = cv.CascadeClassifir(xml_profile);
+  % fd_p = cv.CascadeClassifier(xml_profile);
+  % fd_g = cv.CascadeClassifier(xml_glasses);
   
   DM{1}.fd_h = fd_h;
+  % DM{1}.fd_p = fd_p;
+  % DM{1}.fd_g = fd_g;
   
   Models.DM = DM;
   Models.TM = TM;
   
-  %DM1{1}.fd_h2 = fd_h2;
-  %Promodel.DM1 = DM1;
-  %Promodel.TM = TM;
 end
 
 

@@ -28,7 +28,7 @@
     faces = detect_matfaces( im );
     
     % frontal view and points
-    subplot(2, 2, 1), imshow(im); hold on;
+    subplot(3, 2, 1), imshow(im); hold on;
     for i = 1:length(faces)
       output = xx_track_detect(Models,im,faces{i},option);
       if ~isempty(output.pred)
@@ -36,10 +36,21 @@
       end
     end
 
-fixedPoints  = [double(output.pred(20,1)) double(output.pred(20,2)); double(output.pred(29,1)) double(output.pred(29,2)); ...
-                double(output.pred(14,1)) double(output.pred(14,2)); double(output.pred(15,1)) double(output.pred(15,2)); ...
-                double(output.pred(19,1)) double(output.pred(19,2)); ];
-plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2); hold off;
+fixedPoints  = [output.pred(20,1) output.pred(20,2); output.pred(29,1) output.pred(29,2); ...
+                output.pred(14,1) output.pred(14,2); output.pred(15,1) output.pred(15,2); ...
+                output.pred(19,1) output.pred(19,2); ];
+convexPoints = [output.pred(1,1) output.pred(1,2); output.pred(2,1) output.pred(2,2); ...
+                output.pred(3,1) output.pred(3,2); output.pred(4,1) output.pred(4,2); ...
+                output.pred(5,1) output.pred(5,2); output.pred(6,1) output.pred(6,2); ...
+                output.pred(7,1) output.pred(7,2); output.pred(8,1) output.pred(8,2); ...
+                output.pred(9,1) output.pred(9,2); output.pred(10,1) output.pred(10,2); ...
+                output.pred(20,1) output.pred(20,2); output.pred(29,1) output.pred(29,2); ...
+                output.pred(32,1) output.pred(32,2); output.pred(38,1) output.pred(38,2); ...
+                output.pred(39,1) output.pred(39,2); output.pred(40,1) output.pred(40,2); ...
+                output.pred(41,1) output.pred(41,2); output.pred(42,1) output.pred(42,2); ...
+                output.pred(43,1) output.pred(43,2);];            
+plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2); 
+plot(convexPoints(:,1),convexPoints(:,2),'y*','markersize',2); hold off;
 
 %draw line for features
 % the nose
@@ -60,7 +71,7 @@ facedetected = false;
 facesside = detect_matfaces( imside );
 if (~cellfun('isempty', facesside))
     insertObjectAnnotation(imside,'rectangle',facesside{1},'Face');
-    subplot(2, 2, 2), imshow(imside); hold on;
+    subplot(3, 2, 2), imshow(imside); hold on;
         for i = 1:length(faces)
           output2 = xx_track_detect(Models,imside,facesside{i},option);
           if ~isempty(output2.pred)
@@ -104,7 +115,7 @@ if facedetected == true;
 
         % approximate the normalized face
 
-            subplot(2,2,3), imshow(imsidebound); hold on;
+            subplot(3,2,3), imshow(imsidebound); hold on;
                 insertObjectAnnotation(imsidewarp,'rectangle',faceswarp{1},'Face');
                 plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2);       
                 plot(output3.pred(:,1),output3.pred(:,2),'g*','markersize',2);
@@ -122,7 +133,7 @@ if facedetected == true;
         queryRatio = queryNose / queryEyes;
 
             falsecolorOverlay = imfuse(im,imsidewarp);
-            subplot(2,2,4), imshow(falsecolorOverlay,'InitialMagnification','fit'); hold on;
+            subplot(3,2,4), imshow(falsecolorOverlay,'InitialMagnification','fit'); hold on;
                 plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2); 
                 plot(movingPoints(:,1),movingPoints(:,2),'c*','markersize',2);
             hold off

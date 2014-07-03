@@ -1,7 +1,7 @@
   clear all
 
   input = './data/front.jpg';
-  input2 = './data/imara.jpg';
+  input2 = './data/laurens.jpg';
   mode = 'auto';
   
   % read image from input file
@@ -28,11 +28,11 @@
     faces = detect_matfaces( im );
     
     % frontal view and points
-    subplot(3, 2, 1), imshow(im); hold on;
+    subplot(2, 2, 1), imshow(im); hold on;
     for i = 1:length(faces)
       output = xx_track_detect(Models,im,faces{i},option);
       if ~isempty(output.pred)
-        plot(output.pred(:,1),output.pred(:,2),'g*','markersize',2); 
+        plot(output.pred(:,1),output.pred(:,2),'g*','markersize',5); 
       end
     end
 
@@ -49,8 +49,8 @@ convexPoints = [output.pred(1,1) output.pred(1,2); output.pred(2,1) output.pred(
                 output.pred(39,1) output.pred(39,2); output.pred(40,1) output.pred(40,2); ...
                 output.pred(41,1) output.pred(41,2); output.pred(42,1) output.pred(42,2); ...
                 output.pred(43,1) output.pred(43,2);];            
-plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2); 
-plot(convexPoints(:,1),convexPoints(:,2),'y*','markersize',2); hold off;
+plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',5); 
+%plot(convexPoints(:,1),convexPoints(:,2),'y*','markersize',5); hold off;
 
 %draw line for features
 % the nose
@@ -70,17 +70,17 @@ baseRatio = baseNose / baseEyes;
 facedetected = false;
 facesside = detect_matfaces( imside );
 if (~cellfun('isempty', facesside))
-    insertObjectAnnotation(imside,'rectangle',facesside{1},'Face');
-    subplot(3, 2, 2), imshow(imside); hold on;
+    %insertObjectAnnotation(imside,'rectangle',facesside{1},'Face');
+    subplot(2, 2, 2), imshow(imside); hold on;
         for i = 1:length(faces)
           output2 = xx_track_detect(Models,imside,facesside{i},option);
           if ~isempty(output2.pred)
-            plot(output2.pred(:,1),output2.pred(:,2),'g*','markersize',2); 
+            plot(output2.pred(:,1),output2.pred(:,2),'g*','markersize',5); 
                 facedetected = true;
                 movingfixedPoints  =   [output2.pred(20,1) output2.pred(20,2); output2.pred(29,1) output2.pred(29,2); ...
                                         output2.pred(14,1) output2.pred(14,2); output2.pred(15,1) output2.pred(15,2); ...
                                         output2.pred(19,1) output2.pred(19,2); ];    
-                plot(movingfixedPoints(:,1), movingfixedPoints(:,2), 'c*', 'markersize',2);    
+                plot(movingfixedPoints(:,1), movingfixedPoints(:,2), 'c*', 'markersize',5);    
           end
         end
 else
@@ -115,11 +115,11 @@ if facedetected == true;
 
         % approximate the normalized face
 
-            subplot(3,2,3), imshow(imsidebound); hold on;
-                insertObjectAnnotation(imsidewarp,'rectangle',faceswarp{1},'Face');
-                plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2);       
-                plot(output3.pred(:,1),output3.pred(:,2),'g*','markersize',2);
-                plot(movingPoints(:,1),movingPoints(:,2),'c*','markersize',2);
+            subplot(2,2,3), imshow(imsidewarp); hold on;
+                %insertObjectAnnotation(imsidewarp,'rectangle',faceswarp{1},'Face');
+                plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',5);       
+                plot(output3.pred(:,1),output3.pred(:,2),'g*','markersize',5);
+                plot(movingPoints(:,1),movingPoints(:,2),'c*','markersize',5);
                 %draw line for features
                 % the nose
                 line([output3.pred(11,1) output3.pred(14,1)],[output3.pred(11,2) output3.pred(14,2)]);
@@ -133,9 +133,9 @@ if facedetected == true;
         queryRatio = queryNose / queryEyes;
 
             falsecolorOverlay = imfuse(im,imsidewarp);
-            subplot(3,2,4), imshow(falsecolorOverlay,'InitialMagnification','fit'); hold on;
-                plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',2); 
-                plot(movingPoints(:,1),movingPoints(:,2),'c*','markersize',2);
+            subplot(2,2,4), imshow(falsecolorOverlay,'InitialMagnification','fit'); hold on;
+                plot(fixedPoints(:,1),fixedPoints(:,2),'r*','markersize',5); 
+                plot(movingPoints(:,1),movingPoints(:,2),'c*','markersize',5);
             hold off
         else
             error('no face is detected in the warp');
